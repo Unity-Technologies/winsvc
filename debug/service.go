@@ -13,7 +13,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"code.google.com/p/winsvc/svc"
+	"github.com/multiplay/winsvc/svc"
 )
 
 // Run executes service named name by calling appropriate handler function.

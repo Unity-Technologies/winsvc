@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"code.google.com/p/winsvc/debug"
-	"code.google.com/p/winsvc/eventlog"
-	"code.google.com/p/winsvc/svc"
+	"github.com/multiplay/winsvc/debug"
+	"github.com/multiplay/winsvc/eventlog"
+	"github.com/multiplay/winsvc/svc"
 )
 
 var elog debug.Log

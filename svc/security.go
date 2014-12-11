@@ -7,7 +7,7 @@
 package svc
 
 import (
-	"code.google.com/p/winsvc/winapi"
+	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 	"unsafe"
 )

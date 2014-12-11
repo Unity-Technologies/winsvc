@@ -9,7 +9,7 @@
 package eventlog
 
 import (
-	"code.google.com/p/winsvc/winapi"
+	"github.com/multiplay/winsvc/winapi"
 	"errors"
 	"syscall"
 )
