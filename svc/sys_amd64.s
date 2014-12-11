@@ -8,11 +8,12 @@ TEXT ·servicemain(SB),7,$0
 	MOVL	CX, ·sArgc(SB)
 	MOVL	DX, ·sArgv(SB)
 
-	SUBQ	$32, SP		// stack for the first 4 syscall params
+	SUBQ	$32, SP         // stack for the first 4 syscall params
 
 	MOVQ	·sName(SB), CX
 	MOVQ	$·servicectlhandler(SB), DX
-	MOVQ	·cRegisterServiceCtrlHandlerW(SB), AX
+	MOVQ	$0, R8
+	MOVQ	·cRegisterServiceCtrlHandlerExW(SB), AX
 	CALL	AX
 	CMPQ	AX, $0
 	JE	exit

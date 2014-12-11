@@ -1,1 +1,3 @@
 This repository holds Go packages that can be used to create Windows service.
+It includes additional patches from Multiplay to support the extended service
+control signals such as PRE_SHUTDOWN.

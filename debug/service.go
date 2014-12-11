@@ -9,10 +9,11 @@
 package debug
 
 import (
-	"code.google.com/p/winsvc/svc"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"code.google.com/p/winsvc/svc"
 )
 
 // Run executes service named name by calling appropriate handler function.

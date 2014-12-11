@@ -7,14 +7,15 @@
 package svc_test
 
 import (
-	"code.google.com/p/winsvc/mgr"
-	"code.google.com/p/winsvc/svc"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"code.google.com/p/winsvc/mgr"
+	"code.google.com/p/winsvc/svc"
 )
 
 func getState(t *testing.T, s *mgr.Service) svc.State {
