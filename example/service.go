@@ -7,11 +7,12 @@
 package main
 
 import (
-	"code.google.com/p/winsvc/debug"
-	"code.google.com/p/winsvc/eventlog"
-	"code.google.com/p/winsvc/svc"
 	"fmt"
 	"time"
+
+	"github.com/multiplay/winsvc/debug"
+	"github.com/multiplay/winsvc/eventlog"
+	"github.com/multiplay/winsvc/svc"
 )
 
 var elog debug.Log
@@ -19,15 +20,19 @@ var elog debug.Log
 type myservice struct{}
 
 func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes chan<- svc.Status) (ssec bool, errno uint32) {
-	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown | svc.AcceptPauseAndContinue
+	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown | svc.AcceptPauseAndContinue | svc.AcceptPreShutdown
 	changes <- svc.Status{State: svc.StartPending}
 	fasttick := time.Tick(500 * time.Millisecond)
 	slowtick := time.Tick(2 * time.Second)
 	tick := fasttick
+	shutdown := make(chan struct{})
+	checkpoint := uint32(1)
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
 loop:
 	for {
 		select {
+		case <-shutdown:
+			break loop
 		case <-tick:
 			beep()
 		case c := <-r:
@@ -39,6 +44,31 @@ loop:
 				changes <- c.CurrentStatus
 			case svc.Stop, svc.Shutdown:
 				break loop
+			case svc.PreShutdown:
+				go func() {
+					defer close(shutdown)
+					// This for loop represents some long running process that
+					// allows for periodically updating the service state so the
+					// SCM doesn't think the process has become non-responsive
+					for {
+						// This sends a status update, with an increased
+						// checkpoint so the SCM doesn't think progress has
+						// stalled and a wait hint larger than the expected
+						// time till the next update (in this case our fake
+						// 'work' process is a time.Sleep).
+						//
+						// After 30 seconds of 'work', we return, closing the
+						// shutdown channel, which breaks the loop, which allows
+						// the server to fallthrough to the Stopped state after
+						// the Execute method returns.
+						changes <- svc.Status{State: svc.StopPending, WaitHint: 3000, CheckPoint: checkpoint}
+						time.Sleep(1 * time.Second)
+						checkpoint++
+						if checkpoint > 30 {
+							return
+						}
+					}
+				}()
 			case svc.Pause:
 				changes <- svc.Status{State: svc.Paused, Accepts: cmdsAccepted}
 				tick = slowtick
@@ -50,7 +80,7 @@ loop:
 			}
 		}
 	}
-	changes <- svc.Status{State: svc.StopPending}
+	changes <- svc.Status{State: svc.StopPending, CheckPoint: checkpoint}
 	return
 }
 

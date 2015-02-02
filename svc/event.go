@@ -7,8 +7,8 @@
 package svc
 
 import (
-	"code.google.com/p/winsvc/winapi"
 	"errors"
+	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 )
 

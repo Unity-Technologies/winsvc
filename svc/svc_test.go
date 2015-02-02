@@ -7,14 +7,15 @@
 package svc_test
 
 import (
-	"code.google.com/p/winsvc/mgr"
-	"code.google.com/p/winsvc/svc"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"github.com/multiplay/winsvc/mgr"
+	"github.com/multiplay/winsvc/svc"
 )
 
 func getState(t *testing.T, s *mgr.Service) svc.State {
@@ -61,7 +62,7 @@ func TestExample(t *testing.T) {
 	defer os.RemoveAll(dir)
 
 	exepath := filepath.Join(dir, "a.exe")
-	o, err := exec.Command("go", "build", "-o", exepath, "code.google.com/p/winsvc/example").CombinedOutput()
+	o, err := exec.Command("go", "build", "-o", exepath, "github.com/multiplay/winsvc/example").CombinedOutput()
 	if err != nil {
 		t.Fatalf("failed to build service program: %v\n%v", err, string(o))
 	}
