@@ -8,8 +8,9 @@ package svc
 
 import (
 	"errors"
-	"github.com/multiplay/winsvc/winapi"
 	"syscall"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 // event represents auto-reset, initially non-signaled windows event.

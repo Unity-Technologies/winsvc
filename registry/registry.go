@@ -9,9 +9,10 @@
 package registry
 
 import (
-	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 	"unsafe"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 type Key struct {

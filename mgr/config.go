@@ -7,10 +7,11 @@
 package mgr
 
 import (
-	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 	"unicode/utf16"
 	"unsafe"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 const (

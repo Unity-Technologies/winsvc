@@ -9,9 +9,10 @@
 package eventlog
 
 import (
-	"github.com/multiplay/winsvc/winapi"
 	"errors"
 	"syscall"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 // Log provides access to system log.

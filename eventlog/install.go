@@ -7,10 +7,11 @@
 package eventlog
 
 import (
-	"github.com/multiplay/winsvc/registry"
-	"github.com/multiplay/winsvc/winapi"
 	"errors"
 	"syscall"
+
+	"github.com/multiplay/winsvc/registry"
+	"github.com/multiplay/winsvc/winapi"
 )
 
 const (

@@ -7,9 +7,10 @@
 package mgr
 
 import (
+	"syscall"
+
 	"github.com/multiplay/winsvc/svc"
 	"github.com/multiplay/winsvc/winapi"
-	"syscall"
 )
 
 // TODO(brainman): use EnumDependentServices to enumerate dependent services

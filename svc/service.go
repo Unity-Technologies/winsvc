@@ -10,10 +10,11 @@ package svc
 
 import (
 	"errors"
-	"github.com/multiplay/winsvc/winapi"
 	"runtime"
 	"syscall"
 	"unsafe"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 // State describes service execution state (Stopped, Running and so on).

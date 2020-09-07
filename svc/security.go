@@ -7,9 +7,10 @@
 package svc
 
 import (
-	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 	"unsafe"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 // TODO(brainman): move some of that code to syscall/security.go

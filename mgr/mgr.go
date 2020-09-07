@@ -12,9 +12,10 @@
 package mgr
 
 import (
-	"github.com/multiplay/winsvc/winapi"
 	"syscall"
 	"unicode/utf16"
+
+	"github.com/multiplay/winsvc/winapi"
 )
 
 // Mgr is used to manage Windows service.
